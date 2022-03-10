@@ -20,79 +20,26 @@ function App() {
     
   })
 
-//Mock data
+  const dispatch = useDispatch()
 
-//   let stats=[
-//     {
-//         type:'distance',
-//         image:distance,
-//         amount:'12km',
-//         low:"12m",
-//         high:"2km"
-//     },
-//     {
-//         type:'height',
-//         image:distance,
-//         amount:'12km',
-//         low:"2m",
-//         high:"3km"
-//     },
-//     {
-//         type:'height',
-//         image:distance,
-//         amount:'12km',
-//         low:"2m",
-//         high:"3km"
-//     },
-//     {
-//         type:'height',
-//         image:distance,
-//         amount:'12km',
-//         low:"2m",
-//         high:"3km"
-//     }
-// ]
-//   let actData=[{
-//   type:"Run",
-//   duration: '12s',
-//   title: "xdddd",
-//   timezone: "2018/05/02 | 05:15:09 (Los Angeles, GMT-8)",
-//   stats
-//   },{
-//   type:"Ride",
-//   duration: '3m',
-//   title: "xasddddd",
-//   timezone: "2018/05/02 | 05:15:09 (Los Angeles, GMT-8)",
-//   stats
-//   },{
-//   type:"Swim",
-//   duration: '16hr',
-//   title: "hola",
-//   timezone: "2018/05/02 | 05:15:09 (Los Angeles, GMT-8)",
-//   stats
-//   },{
-//   type:"Run",
-//   duration: '1d',
-//   title: "10102120",
-//   timezone: "2018/05/02 | 05:15:09 (Los Angeles, GMT-8)",
-//   stats
-//   },{
-//   type:"Whatever",
-//   duration: '3d',
-//   title: "oof",
-//   timezone: "2018/05/02 | 05:15:09 (Los Angeles, GMT-8)",
-//   stats
-//   }]
+  const user = useSelector(state=>state.user)
 
+  useEffect(()=>{
+      dispatch(getUserData())
+  },[])
+
+
+ if(user){
   return (
     <div className="App">
+      
       <Sidebar/>
       <Sectors id='sectors'>
       <Activities/>
       <MonthlyStats/>
       </Sectors>
     </div>
-  );
+  )} else return null;
 }
 
 const Sectors = styled.div`
