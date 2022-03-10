@@ -1,26 +1,27 @@
-//import { ADD_FAVORITE, REMOVE_FAVORITE, SEARCH_MOVIES, GET_DETAILS, SEARCHSTATE } from '../Actions';
+import { GET_USER_DATA, GET_ACTIVITIES, GET_HIGH_SCORES, SELECT_MONTH } from '../actions';
+
 
 const initialState = {
-    state: [],
+    activities: [],
+    user: {},
+    scores: {},
+    selectedMonth: []
 };
 
 export default function reducer(state=initialState, action){
     switch (action.type) {
-        // case SEARCHSTATE: 
-        //     return {...state, searchState: action.payload}
+        case GET_USER_DATA: 
+            return {...state, user: action.payload}
 
-        // case ADD_FAVORITE:
-        //     return {...state, favouriteMovies: state.favouriteMovies.concat(action.payload)}
+        case GET_ACTIVITIES:
+            return {...state, activities: action.payload}
 
-        // case REMOVE_FAVORITE:
-        //     return {...state, favouriteMovies: state.favouriteMovies.filter(movie=>movie.id!==action.payload)}
+        case GET_HIGH_SCORES:
+            return {...state, scores: action.payload}   
+            
+        case SELECT_MONTH:
+            return {...state, selectedMonth: action.payload} 
 
-        // case SEARCH_MOVIES:
-        //     return {...state, foundMovies: action.payload.results}
-
-        // case GET_DETAILS:
-        //     return {...state, movieDetail: state.movieDetail.concat(action.payload)}
-    
         default:
             return state
     }

@@ -7,19 +7,21 @@ export default function UserSideStats({ icon, label, value, unit }) {
 		<SideStats>
             <Labeler>
                 <Icon>{icon}</Icon>
-                <Label>{label}</Label>
+                <Value>{value}<Unit>{unit}</Unit></Value>
             </Labeler>
-            <Value>{value}<Unit>{unit}</Unit></Value>
+                <Label>{label}</Label>
 		</SideStats>
 	);
 }
 
 const Labeler = styled.div`
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     height: 100%;
+    width:100% ;
     overflow: hidden;
+    align-items: center;
 `
 
 const Unit = styled.span`
@@ -29,37 +31,50 @@ const Unit = styled.span`
 const Label = styled.span`
     text-shadow: 0px 6px 4px rgb(0 0 0 / 25%);
     text-align: start;
-    display: flex;
-    flex-wrap: wrap;
+    white-space:nowrap ;
+    display:flex ;
+    width:100% ;
 `
 
 const Icon = styled.span`
     display: flex;
     height: 100%;
-    max-height: 100px;
     width: 100%;
     max-width: 100px;
+    align-items: flex-end;
 
 >svg{
     width: fit-content;
-    height: 100%;
-    padding:5px;
-    box-sizing: border-box;
-}
-*{
-    height: 100%;
+    height: 7vh;
+    *{
     width: 100%;
 }
+}
+
 `
 
 const SideStats = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     width: 80%;
-    margin: 5px;
+    height:30% ;
     color: white;
     align-items: center;
+    @media (max-width:1000px) {
+        height:unset;
+        flex-direction: column;
+        align-items: center;
+        ${Labeler}{
+            flex-direction: column;
+        }
+        ${Icon}{
+            justify-content: center;
+        }
+        ${Label}{
+            justify-content: center;
+        }
+    }
 `
 
 const Value = styled.h3`
