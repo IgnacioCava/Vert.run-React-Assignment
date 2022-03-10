@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 export default function MonthlySummary({month, stats}){
-    console.log(stats)
     if(stats){
     return(
         
@@ -12,7 +11,7 @@ export default function MonthlySummary({month, stats}){
             <Stats>
                 <Icon src={stats.icon} alt={stats.type}/>
                 <Numbers>
-                    <Total>{stats.total.unit==='%'?stats.total.value/(stats.total.samples||1):stats.total.value}{stats.total.unit}</Total>
+                    <Total>{stats.total.unit==='%'?stats.total.value/(stats.total.samples||1):Math.round(stats.total.value/1000)}{stats.total.unit}</Total>
                     <Details>
                         <div>
                             <p>{stats.top.label}</p>

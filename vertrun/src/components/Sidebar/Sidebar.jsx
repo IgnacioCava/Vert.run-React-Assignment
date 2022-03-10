@@ -51,9 +51,9 @@ export default function Sidebar(){
             <SideStats>
                 <UserSideStats icon={<FriendsIcon/>} label={"Followers"} value={userData?.follower||0}/>
                 <hr/>
-                <UserSideStats icon={<RunDistance/>} label={"Jog stats"} value={userScores.all_run_totals?.distance} unit={'m'}/>
+                <UserSideStats icon={<RunDistance/>} label={"Jog stats"} value={Math.round(userScores.all_run_totals?.distance/1000)} unit={'km'}/>
                 <hr/>
-                <UserSideStats icon={<RideDistance/>} label={"Ride stats"} value={userScores.all_ride_totals?.distance} unit={'m'}/>
+                <UserSideStats icon={<RideDistance/>} label={"Ride stats"} value={Math.round(userScores.all_ride_totals?.distance/1000)} unit={'km'}/>
             </SideStats>
             
 

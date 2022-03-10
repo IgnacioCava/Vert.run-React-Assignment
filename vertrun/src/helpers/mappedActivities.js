@@ -19,14 +19,14 @@ export default function activityMapper(activityList, distance, uptime, height){
             distance?{
                 type:'Distance',
                 icon: distanceIcon,
-                total: {value:e.distance, unit:'m'},
+                total: {value:e.distance, unit:'km'},
                 top:{value:Math.round(e.max_speed), unit:'m/s',label:'Top speed'},
                 bot:{value:Math.round(e.average_speed), unit:'m/s', label:'Average'},
             }:0,
             uptime?{
                 type:'Gained Height',
                 icon: heightIcon,
-                total: {value:e.total_elevation_gain, unit:'m'},
+                total: {value:e.total_elevation_gain, unit:'km'},
                 top:{value:e.elev_high,  unit:'m', label:'Highest'},
                 bot:{value:e.elev_low,  unit:'m', label:'Lowest'}
             }:0,
@@ -34,8 +34,8 @@ export default function activityMapper(activityList, distance, uptime, height){
                 type:'Uptime',
                 icon: timeIcon,
                 total: {value:e.moving_time/e.elapsed_time*100, unit:'%'},
-                top:{value:e.elapsed_time, unit:'s', label:'Total time'},
-                bot:{value:e.moving_time, unit:'s', label:'Moving time'}
+                top:{value:e.elapsed_time>3600?e.elapsed_time/3600:e.elapsed_time, unit:e.elapsed_time>3600?'hs':'s', label:'Total time'},
+                bot:{value:e.moving_time>3600?e.moving_time/3600:e.moving_time, unit:e.moving_time>3600?'hs':'s', label:'Moving time'}
             }:0],
         })
     })

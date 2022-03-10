@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 export default function ActivitySection({stats}){
 
-//[actData.amount, actData.low].map()
     return(
         <SectionContainer>
             {stats?.map((e,i)=>e?
@@ -12,7 +11,7 @@ export default function ActivitySection({stats}){
                     <Type>{e.type}</Type>
                     <MainData>
                         <Icon src={e.icon} alt={e.type}/>
-                        <Amount>{e.total.value+e.total.unit}</Amount>
+                        <Amount>{Math.round(e.total.value/1000)}{e.total.unit==='%'?'%':'km'}</Amount>
                     </MainData>
 
                     <Separator>
@@ -22,11 +21,11 @@ export default function ActivitySection({stats}){
                     <SecData>
                         <div>
                             <p>{e.bot.label}</p>
-                            <SubAmount>{e.bot.value+e.bot.unit}</SubAmount>
+                            <SubAmount>{e.bot.value?e.bot.value:0}{e.bot.unit}</SubAmount>
                         </div>
                         <div>
                             <p>{e.top.label}</p>
-                            <SubAmount>{e.top.value+e.top.unit}</SubAmount>
+                            <SubAmount>{e.top.value?e.top.value:0}{e.top.unit}</SubAmount>
                         </div>
                     </SecData>
                 </Act>:null
