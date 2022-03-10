@@ -4,6 +4,25 @@
   flex-direction: row;
   height: 100%;
   font-family: 'Roboto', sans-serif;
+  
+}
+
+@media (max-width:1000px) {
+  .App{
+    flex-direction: column;
+
+  }
+}
+
+::-webkit-scrollbar{
+  background-color: transparent;
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: rgb(13, 72, 149);
+  border-radius: 5px;
 }
 
 #root{
@@ -12,6 +31,7 @@
 
 body,html{
   height: 100%;
+  
 }
 
 .App-logo {

@@ -1,30 +1,45 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
-import ActivityCard from '../../components/StarCards/ActivityCard'
+import ActivityCard from './Components/ActivityCard'
+import { useSelector, useDispatch } from 'react-redux'
+import { getActivities } from '../../Redux/actions'
+import activityMapper from '../../helpers/mappedActivities'
 
+export default function Activities({actData}){
+    
+    const dispatch = useDispatch()
+    const activities = useSelector(state=>state.activities)
+    const userData = useSelector(state=>state.user)  
 
-export default function Activities(){
+    useEffect(()=>{
+        if(!Object.keys(activities).length) dispatch(getActivities())
+    },[userData])
 
     return(
-        <ActivitiesHolder>
-            <ActivityCard/>
-            <ActivityCard/>
-            <ActivityCard/>
-            <ActivityCard/>
-            <ActivityCard/>
-            <ActivityCard/>
-            <ActivityCard/>
-            <ActivityCard/>
-
+        <ActivitiesHolder id='act'>
+            {(actData||activityMapper(activities, true, true, false))?.map((e,i)=>
+            <Distributor key={i}>
+                <ActivityCard actData={e}/>
+            </Distributor>
+            )}
         </ActivitiesHolder>
     )
 }
 
 const ActivitiesHolder = styled.div`
     display: flex;
-    width: 80%;
+    justify-content: space-evenly;
+    width: 100%;
+    height:100% ;
     overflow: auto;
-    background: linear-gradient(180deg,#007BD3 0%,rgba(0,123,211,0.31) 100%);
+    align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-` 
+`
+
+const Distributor = styled.div`
+    height:50%;
+    width:50%;
+    padding:20px; 
+    box-sizing:border-box;
+`

@@ -1,37 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
-import distance from '../../assets/distance.png'
 
 
-export default function ActivitySection({actData}){
-console.log(actData)
+export default function ActivitySection({stats}){
 
 //[actData.amount, actData.low].map()
     return(
         <SectionContainer>
-            {actData?.map((e,i)=>
-            <>
-                <Act>
-                    <Type>{e.type||"Distance"}</Type>
-                    <Icon src={e.image||distance} alt={e.type}/>
-                    <Amount>{e.amount}</Amount>
+            {stats?.map((e,i)=>e?
+                <Act key={i}>
+                    <Type>{e.type}</Type>
+                    <MainData>
+                        <Icon src={e.icon} alt={e.type}/>
+                        <Amount>{e.total.value+e.total.unit}</Amount>
+                    </MainData>
+
                     <Separator>
                     <hr/> at <hr/>
-
                     </Separator>
+                    
                     <SecData>
                         <div>
-                            <p>Average</p>
-                            <SubAmount>{e.low}</SubAmount>
+                            <p>{e.bot.label}</p>
+                            <SubAmount>{e.bot.value+e.bot.unit}</SubAmount>
                         </div>
                         <div>
-                            <p>Top</p>
-                            <SubAmount>{e.high}</SubAmount>
-                            
+                            <p>{e.top.label}</p>
+                            <SubAmount>{e.top.value+e.top.unit}</SubAmount>
                         </div>
                     </SecData>
-                </Act>
-                </>
+                </Act>:null
             )}
         </SectionContainer>
     )
@@ -45,7 +43,16 @@ flex-direction: row;
 flex-wrap: wrap;
 justify-content: space-evenly;
 gap:10px;
-height: 100;
+width: 100%;
+height: 100%;
+`
+
+const MainData = styled.div`
+display: flex;
+flex-direction:column ;
+width:100% ;
+align-items: center;
+justify-content: space-evenly;
 `
 
 const Type = styled.span`
@@ -57,23 +64,26 @@ padding-left: 5px;
 
 const Icon = styled.img`
 width: 50%;
+height: 8.5vh;
 object-fit:contain ;
 `
 
 const Amount = styled.span`
 font-weight: bold;
-font-size: 3vw;
+font-size: min(3vw, 5vh);
 `
 
 const Act = styled.div`
 display:flex ;
 justify-content: space-around;
 flex-direction:column ;
+overflow: auto;
 align-items: center;
-background: rgba(18, 18, 18, 0.11);
+background: rgb(43, 119, 185);
 border-radius: 10px;
 width: 45%;
 height: 100%;
+min-height:200px ;
 `
 
 const Separator = styled.div`
@@ -97,10 +107,11 @@ font-size:15px ;
 const SecData = styled.div`
 display:  flex;
 width: 80%;
-justify-content: space-around;
+justify-content: space-between;
 p{
     margin:0;
     font-size:15px ;
+    text-align: left;
 }
 div{
     display:flex ;
@@ -110,6 +121,6 @@ div{
 `
 
 const SubAmount = styled.span`
-font-size:25px ;
+font-size:min(2vw, 4vh) ;
 font-weight:700 ;
 `
